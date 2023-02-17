@@ -34,6 +34,7 @@ OPTIONS:
   --no-cache                          disabled cache for response. defaults: true
   --tls-cert-file=<filepath>          the cert file path for enabled tls. defaults: ""
   --tls-key-file=<filepath>           the key file path for enabled tls. defaults: ""
+  --replace-content="a=b"             Contents to be replaced. defaults: ""
 
 EXAMPLES:
   forward http://example.com
