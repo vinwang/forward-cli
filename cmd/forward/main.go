@@ -114,7 +114,7 @@ func main() {
 
 	flag.Parse()
 
-	useTLS = certFilePath != "" && keyFilePath != ""
+	useTLS = (certFilePath != "" && keyFilePath != "") || useTLS
 
 	if showHelp {
 		printHelp()
