@@ -48,6 +48,7 @@ type ProxyServerOptions struct {
 	Cors                 bool        // whether enable cors
 	NoCache              bool        // disabled cache for response
 	OverwriteFolder      string      // overwrite request with paths
+	ReplaceContent       []string    // overwrite request with paths
 }
 
 func NewProxyServer(options *ProxyServerOptions) *ProxyServer {
@@ -191,8 +192,29 @@ func (p *ProxyServer) modifyRequest(req *http.Request) {
 	}
 }
 
+func WriteFile(filename string, data []byte, perm os.FileMode) error {
+	f, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, perm)
+	if err != nil {
+		return err
+	}
+	n, err := f.Write(data)
+	if err == nil && n < len(data) {
+		err = io.ErrShortWrite
+	}
+	if err1 := f.Close(); err == nil {
+		err = err1
+	}
+	return err
+}
+
 func (p *ProxyServer) modifyContent(extNames []string, body []byte, originHost string, proxyHost string) []byte {
 	bodyStr := string(body)
+
+	for _, paren := range p.ReplaceContent {
+		arr := strings.Split(paren, "=")
+
+		bodyStr = strings.ReplaceAll(bodyStr, arr[0], arr[1])
+	}
 
 	bodyStr = replaceHost(bodyStr, originHost, proxyHost, p.UseSSL, p.ProxyExternal, p.ProxyExternalIgnores)
 

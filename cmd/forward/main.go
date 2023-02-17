@@ -90,6 +90,7 @@ func main() {
 		certFilePath         string     = ""
 		keyFilePath          string     = ""
 		useTLS               bool       = false
+		replaceContentArray  arrayFlags = arrayFlags{}
 	)
 
 	flag.BoolVar(&showHelp, "help", showHelp, "")
@@ -105,6 +106,7 @@ func main() {
 	flag.StringVar(&overwriteFolder, "overwrite", overwriteFolder, "")
 	flag.StringVar(&certFilePath, "tls-cert-file", certFilePath, "")
 	flag.StringVar(&keyFilePath, "tls-key-file", keyFilePath, "")
+	flag.Var(&replaceContentArray, "replace-content", "")
 
 	flag.Usage = printHelp
 
@@ -190,6 +192,7 @@ func main() {
 		NoCache:              noCache,
 		OverwriteFolder:      overwriteFolder,
 		UseSSL:               useTLS,
+		ReplaceContent:       replaceContentArray,
 	})
 
 	http.HandleFunc("/", proxy.Handler())
