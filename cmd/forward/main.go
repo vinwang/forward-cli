@@ -108,6 +108,7 @@ func main() {
 	flag.StringVar(&certFilePath, "tls-cert-file", certFilePath, "")
 	flag.StringVar(&keyFilePath, "tls-key-file", keyFilePath, "")
 	flag.Var(&replaceContentArray, "replace-content", "")
+	flag.BoolVar(&useTLS, "useTLS", useTLS, "")
 
 	flag.Usage = printHelp
 
