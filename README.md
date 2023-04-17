@@ -42,6 +42,7 @@ EXAMPLES:
   forward --req-header="foo=bar" http://example.com
   forward --cors --req-header="foo=bar" --req-header="hello=world" http://example.com
   forward --tls-cert-file=/path/to/cert/file --tls-key-file=/path/to/key/file http://example.com
+  forward --port=80 http://example.com --replace-content="value=newvalue"
 ```
 
 ### 安装
@@ -49,29 +50,29 @@ EXAMPLES:
 1. [Cask](https://github.com/axetroy/cask.rs)
 
    ```bash
-   cask install github.com/axetroy/forward-cli
+   cask install github.com/vinwang/forward-cli
    ```
 
 2. Shell (Mac/Linux)
 
    ```bash
-   curl -fsSL https://github.com/release-lab/install/raw/v1/install.sh | bash -s -- -r=axetroy/forward-cli -e=forward
+   curl -fsSL https://github.com/release-lab/install/raw/v1/install.sh | bash -s -- -r=vinwang/forward-cli -e=forward
    ```
 
 3. PowerShell (Windows):
 
    ```powershell
-   $r="axetroy/forward-cli";$e="forward";iwr https://github.com/release-lab/install/raw/v1/install.ps1 -useb | iex
+   $r="vinwang/forward-cli";$e="forward";iwr https://github.com/release-lab/install/raw/v1/install.ps1 -useb | iex
    ```
 
-4. [Github release page](https://github.com/axetroy/forward-cli/releases) (全平台)
+4. [Github release page](https://github.com/vinwang/forward-cli/releases) (全平台)
 
    下载可执行文件，然后放到 `$PATH` 目录下
 
 5. 使用 [Golang](https://golang.org) 从源码中构建并安装 (全平台)
 
    ```bash
-   go install github.com/axetroy/forward-cli/cmd/forward@latest
+   go install github.com/vinwang/forward-cli/cmd/forward@latest
    ```
 
 ### 杂项
